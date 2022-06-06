@@ -1,0 +1,75 @@
+.books {
+  margin-top: 2rem;
+  background-color: var(--secondary);
+  padding: 1rem;
+  color: black;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+.books .title {
+  padding: 1rem 0rem;
+}
+
+.spinner__container {
+  padding: 2rem;
+}
+
+.book {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  gap: 1rem;
+  border-top: 2px solid var(--primary);
+  border-bottom: 2px solid var(--primary);
+  transition: transform 250ms ease;
+  position: relative;
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  margin: 1rem 0rem;
+}
+
+.error {
+  text-align: center;
+  padding: 1rem 0rem;
+}
+
+.book::before {
+  content: "Click to View Book Details";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  color: var(--secondary);
+  font-size: 1.5rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary);
+  opacity: 0;
+  transition: opacity 250ms ease;
+  border-radius: var(--border-radius);
+}
+
+.book:hover {
+  transform: scale(0.98);
+}
+
+.book:hover::before {
+  opacity: 1;
+}
+
+.book img {
+  width: 100px;
+  height: 100px;
+  border-top-left-radius: var(--border-radius);
+  border-bottom-left-radius: var(--border-radius);
+}
+
+.book__metadata {
+  flex: 1;
+  text-align: center;
+}
