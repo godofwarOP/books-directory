@@ -33,6 +33,9 @@ export class AddbookComponent implements OnInit {
     const status = this.bookData.status;
 
     if (status === 'VALID') {
+      this.bookData.value.releaseDate = new Date(
+        this.bookData.value.releaseDate!
+      ).toDateString();
       this.bookService
         .addBook({ ...this.bookData.value } as Book)
         .subscribe((book) => {

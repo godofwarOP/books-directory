@@ -9,10 +9,69 @@
 
 .books .title {
   padding: 1rem 0rem;
+  display: flex;
+  justify-content: space-between;
 }
 
-.spinner__container {
-  padding: 2rem;
+.books .title .btn--sort {
+  background-color: var(--primary);
+  font-size: 1.3rem;
+}
+
+.dropdown {
+  position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dropdown__list {
+  transform-origin: top;
+  transform: scaleY(0);
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  margin-top: 0.2rem;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 9999;
+  transition: transform 100ms ease;
+}
+
+.dropdown__container:hover .dropdown__list {
+  transform: scaleY(1);
+}
+
+.dropdown__list__container {
+  background-color: var(--primary);
+  color: var(--secondary);
+  display: flex;
+}
+
+.dropdown--list p {
+  padding: 1rem;
+  text-align: center;
+  background-color: var(--secondary);
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.dropdown--item {
+  font-size: 1.1rem;
+  padding: 1rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.dropdown--item__active {
+  background-color: var(--secondary);
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.dropdown--item:hover {
+  background-color: var(--secondary);
+  color: var(--primary);
 }
 
 .book {

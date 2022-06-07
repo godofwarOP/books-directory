@@ -22,8 +22,18 @@ export class BookdetailComponent implements OnInit {
     error: '',
   };
 
+  updateModalState: boolean = false;
+
   ngOnInit(): void {
     this.getBookById();
+  }
+
+  openUpdateModal(): void {
+    this.updateModalState = true;
+  }
+
+  closeUpdateModal(): void {
+    this.updateModalState = false;
   }
 
   getBookById(): void {
@@ -34,6 +44,9 @@ export class BookdetailComponent implements OnInit {
         this.goBack();
       } else {
         this.state.data = book;
+        setTimeout(() => {
+          this.state.isLoading = false;
+        }, 1000);
       }
     });
   }
@@ -49,6 +62,10 @@ export class BookdetailComponent implements OnInit {
     this.bookService.deleteBookById(id).subscribe((book) => {
       this.goBack();
     });
+  }
+
+  updateBook(book: Book): void {
+    this.state.data = book;
   }
 
   goBack(): void {

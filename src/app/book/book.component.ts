@@ -8,7 +8,7 @@ import { BookService } from '../book.service';
   styleUrls: ['./book.component.css'],
 })
 export class BookComponent implements OnInit {
-  constructor(private bookSerivce: BookService) {}
+  constructor(public bookService: BookService) {}
 
   state = {
     isLoading: true,
@@ -20,10 +20,41 @@ export class BookComponent implements OnInit {
     this.getBooks();
   }
 
-  getBooks() {
-    this.bookSerivce.getBooks().subscribe((books) => {
+  sortByTitle(): void {
+    this.bookService.state.sort = 'title';
+    this.getBooks();
+  }
+
+  sortByDate(): void {
+    this.bookService.state.sort = 'releaseDate';
+    this.getBooks();
+  }
+
+  sortByAuthor(): void {
+    this.bookService.state.sort = 'author';
+    this.getBooks();
+  }
+
+  orderByAsc(): void {
+    this.bookService.state.order = 'asc';
+    this.getBooks();
+  }
+
+  orderByDesc(): void {
+    this.bookService.state.order = 'desc';
+    this.getBooks();
+  }
+
+  getBooks(): void {
+    this.state.isLoading = true;
+    this.bookService.getBooks().subscribe((books) => {
       this.state.data = books;
-      this.state.isLoading = false;
+      setTimeout(() => {
+        this.state.isLoading = false;
+      }, 1000);
     });
   }
 }
+
+// _sort=releaseDate&_order=desc -- sort according to date
+// _sort=title&_order=asc -- sort according to title

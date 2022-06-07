@@ -9,6 +9,7 @@ import { BookComponent } from './book/book.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { BookdetailComponent } from './bookdetail/bookdetail.component';
 import { AddbookComponent } from './addbook/addbook.component';
+import { UpdatebookComponent } from './updatebook/updatebook.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AddbookComponent } from './addbook/addbook.component';
     SpinnerComponent,
     BookdetailComponent,
     AddbookComponent,
+    UpdatebookComponent,
   ],
   imports: [
     BrowserModule,

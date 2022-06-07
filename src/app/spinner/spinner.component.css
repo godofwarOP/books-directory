@@ -9,6 +9,7 @@
   border-bottom-color: #fff;
   animation: spinner3 800ms ease infinite;
 }
+
 @keyframes spinner3 {
   to {
     transform: rotate(360deg);

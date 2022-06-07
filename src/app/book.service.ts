@@ -11,6 +11,11 @@ export class BookService {
 
   private API_BASE_URL = 'http://localhost:3004/books/';
 
+  state = {
+    sort: 'title',
+    order: 'asc',
+  };
+
   private errorHandler<T>(operation = 'Operation', result?: T) {
     return (error: any): Observable<T> => {
       console.log(error);
@@ -20,15 +25,24 @@ export class BookService {
 
   getBooks(): Observable<Book[]> {
     return this.http
-      .get<Book[]>(this.API_BASE_URL)
+      .get<Book[]>(
+        `${this.API_BASE_URL}?_sort=${this.state.sort}&_order=${this.state.order}`
+      )
       .pipe(catchError(this.errorHandler<Book[]>('getBooks', [])));
   }
 
   getBookById(id: number): Observable<Book> {
     const url = `${this.API_BASE_URL}${id}`;
-    return this.http
-      .get<Book>(url)
-      .pipe(catchError(this.errorHandler<Book>('getBook')));
+    return this.http.get<Book>(url).pipe(
+      tap((book) => {
+        book.releaseDate = new Date(book.releaseDate).toDateString();
+        return {
+          ...book,
+          releaseDate: book.releaseDate,
+        };
+      }),
+      catchError(this.errorHandler<Book>('getBook'))
+    );
   }
 
   deleteBookById(id: number): Observable<Book> {
@@ -39,17 +53,23 @@ export class BookService {
   }
 
   addBook(book: Book): Observable<Book> {
-    console.log(book);
-
     return this.http
       .post<Book>(this.API_BASE_URL, book, {
         headers: {
           'Content-Type': 'application/json',
         },
       })
-      .pipe(
-        tap((book) => console.log(book)),
-        catchError(this.errorHandler<Book>('addBook'))
-      );
+      .pipe(catchError(this.errorHandler<Book>('addBook')));
+  }
+
+  updateBookById(id: number, book: Book): Observable<Book> {
+    const url = `${this.API_BASE_URL}${id}`;
+    return this.http
+      .patch<Book>(url, book, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .pipe(catchError(this.errorHandler<Book>('updateBook')));
   }
 }

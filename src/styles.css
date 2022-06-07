@@ -47,6 +47,11 @@ button {
   border: none;
 }
 
+input {
+  border: none;
+  outline: none;
+}
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -126,4 +131,8 @@ nav .title h1 {
 .backbtn div svg {
   width: 1rem;
   aspect-ratio: 1 / 1;
+}
+
+.spinner__container {
+  padding: 2rem;
 }
